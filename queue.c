@@ -46,7 +46,7 @@ struct json *
 run_script (struct json *json)
 {
 	int fd;
-	char filename[1000], *jsonstr, cmd[1000];
+	char filename[1000], *jsonstr, cmd[1000], *script;
 	FILE *f;
 
 	strcpy (filename, "/tmp/queue.XXXXXX");
@@ -61,7 +61,8 @@ run_script (struct json *json)
 	write (fd, jsonstr, strlen (jsonstr));
 	close (fd);
 
-	sprintf (cmd, "./birthday %s", filename);
+	script = json_objref_str (json, "script");
+	sprintf (cmd, "%s %s", script, filename);
 	if (system (cmd) != 0) {
 		fprintf (stderr, "something bad happened\n");
 		return (NULL);
@@ -93,13 +94,11 @@ int
 main (int argc, char **argv)
 {
 	int idx, size, cur_idx;
-	char *jsonstr, *filename, *json_arg;
+	char *jsonstr, *filename;
 	struct json *inp_json, *queue, *cur, *new;
 	struct tm tm;
 	time_t t;
 	FILE *f;
-
-	json_arg = NULL;
 
 	filename = "queue.json";
 	if ((f = fopen (filename, "r")) == NULL) {
