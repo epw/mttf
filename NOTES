@@ -1,0 +1,8 @@
+Need to make absolute paths work. Right now requires use of mttf/
+directory.
+
+Queue needs to be daemon.
+
+Events need to know "last run" date, with count of how many times run,
+to allow catching overrides.
+
