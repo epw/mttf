@@ -6,3 +6,4 @@ Queue needs to be daemon.
 Events need to know "last run" date, with count of how many times run,
 to allow catching overrides.
 
+Should make "make; make install" work to use as package.
