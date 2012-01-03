@@ -154,6 +154,7 @@ main (int argc, char **argv)
 	char *newjson;
 	newjson = json_encode (queue);
 	fwrite (newjson, 1, strlen (newjson), f);
+	fprintf (f, "\n");
 	fclose (f);
 
 	return (0);
